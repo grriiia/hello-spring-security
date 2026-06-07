@@ -119,14 +119,24 @@
                                       th:text="${p.stock}"></span>
                                 <span th:if="${p.stock == 0}" class="badge badge-stock-out">품절</span>
                             </td>
-                            <td class="text-center text-muted small"
-                                th:text="${#temporals.format(p.createdAt, 'yyyy-MM-dd')}"></td>
-                            <td class="text-center" sec:authorize="hasRole('ADMIN')">
-                                <form th:action="@{/products/{id}/delete(id=${p.id})}" method="post"
-                                      onsubmit="return confirm('삭제하시겠습니까?')">
-                                    <button class="btn btn-outline-danger btn-sm">삭제</button>
-                                </form>
-                            </td>
+                        <td class="text-center text-muted small"
+                            th:text="${#temporals.format(p.createdAt, 'yyyy-MM-dd')}">
+                        </td>
+                        <td class="text-center" sec:authorize="hasRole('ADMIN')">
+                            <a th:href="@{/products/{id}/edit(id=${p.id})}"
+                               class="btn btn-outline-primary btn-sm me-1">
+                                수정
+                            </a>
+                            <form th:action="@{/products/{id}/delete(id=${p.id})}"
+                                  method="post"
+                                  style="display:inline;"
+                                  onsubmit="return confirm('삭제하시겠습니까?')">
+                                <button type="submit"
+                                        class="btn btn-outline-danger btn-sm">
+                                    삭제
+                                </button>
+                            </form>
+                        </td>
                         </tr>
                     </tbody>
                 </table>
